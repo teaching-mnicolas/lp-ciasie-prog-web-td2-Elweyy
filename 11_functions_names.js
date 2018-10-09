@@ -53,6 +53,7 @@ describe ("Function Name", function() {
     let h = g;
     g = 1;
     expect(h()).toEqual(10);  // explain why it works now !
+    // Ici on utilise le nom de la fonction dans la récursion.
   });
 
   it ("is hoisted", function() {
