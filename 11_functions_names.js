@@ -4,21 +4,21 @@ describe ("Function Name", function() {
     function f() {
       return 1;
     };
-    expect(__).toEqual(1);      // call directly f()
+    expect(f()).toEqual(1);      // call directly f()
   });
 
   it ("can have a property 'name'", function() {
     function f() {
       return 1;
     };
-    expect(__).toEqual("f");    // check the name property of f
+    expect(f.name).toEqual("f");    // check the name property of f
   });
 
   it ("have a property 'name' by default if assigned to a variable", function() {
     let f = function() {
       return 1;
     };
-    expect(__).toEqual("f");     // check the name property of f
+    expect(f.name).toEqual("f");     // check the name property of f
   });
 
   it ("is problematic to use var name in recursion", function() {
@@ -37,6 +37,7 @@ describe ("Function Name", function() {
       expect(h()).toEqual(10);  // this line throw an exception, why ?
     };
     expect(wrapper).toThrow();  // explain why it doesn't work !!!
+    // On ne peut pas utiliser le nom d'une variable dans une récursion !!
   });
 
   it ("is better to use function name in recursion", function() {
@@ -55,7 +56,7 @@ describe ("Function Name", function() {
   });
 
   it ("is hoisted", function() {
-    let a = __;               // call f() here, even if it's not yet defined
+    let a = f();               // call f() here, even if it's not yet defined
     function f() {
       return 1;
     };
@@ -64,7 +65,7 @@ describe ("Function Name", function() {
 
   it ("is not hoisted if put in a var!", function() {
     let wrapper = function() {
-      let a = __;           // call f() here, even if it's not yet defined - it will throw an exception
+      let a = f();           // call f() here, even if it's not yet defined - it will throw an exception
       let g = function f() {
         return 1;
       };
@@ -77,7 +78,7 @@ describe ("Function Name", function() {
       let g = function f() {
         return 1;
       };
-      let a = __;         // call f() here, even if it's defined - it will throw an exception
+      let a = f();         // call f() here, even if it's defined - it will throw an exception
     };
     expect(wrapper).toThrow();
   });
